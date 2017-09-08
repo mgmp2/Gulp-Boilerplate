@@ -1,0 +1,40 @@
+$columns : 12;
+$column-width : 100%/$columns;
+$breakpoints : (xs : 0, s : 768px, m : 992px, l : 1200px );
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.col{
+  float:left;
+  min-height:1px;
+}
+
+@function column-width($column){
+  @return $column-width*$column;
+}
+@mixin column($media, $min-width){
+  @media (min-width:$min-width){
+    @for $i from 1 through $columns {
+      .#{$media}-#{$i} {
+        width: column-width($i);
+        margin-left: auto;
+        left: auto;
+        right: auto;
+      }
+    }
+  }
+}
+@each $name, $width in $breakpoints {
+  @include column($name, $width);
+}

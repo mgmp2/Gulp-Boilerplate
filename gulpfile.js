@@ -81,11 +81,15 @@ gulp.task("html-watch", ["html"], function (done) {
 
 
 gulp.task("serve", function () {
-  browserSync.init({
-    server: {
-      baseDir: config.build
-    }
-  });
+  browserSync.init(null, {
+      // proxy: "http://localhost:5000",
+      files: ["public/**/*.*"],
+      //browser: "google chrome",
+      port: 7000,
+      server: {
+        baseDir: config.dist
+      }
+    });
 
   gulp.watch(sources.html, ["html-watch"]);
   gulp.watch(sources.sass, ["sass-watch"]);

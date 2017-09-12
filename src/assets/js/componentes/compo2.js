@@ -1,1 +1,2 @@
-console.log("Soy componente 2");
+
+console.log("Al fin  segundo csssomponente");

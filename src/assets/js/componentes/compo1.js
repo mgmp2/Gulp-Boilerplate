@@ -1,1 +1,2 @@
-console.log("Soy primer componente");
+
+console.log(" componente ");

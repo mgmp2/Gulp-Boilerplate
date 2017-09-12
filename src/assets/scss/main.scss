@@ -1,4 +1,5 @@
 @import "styleui/grid.scss";
+@import "styleui/examplex.scss";
 
 /*
 GENERAL
@@ -11,6 +12,6 @@ $gris-oscuro: #828282;
 
 
 h1 {
-  color: red ;
-  font-size: 21px;
+  font-size: 34px;
+  text-align: center;
 }

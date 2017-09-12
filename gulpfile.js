@@ -13,47 +13,54 @@ var config = {
 //actualizo paths y sources de sass
 var paths = {
   assets: "assets/",
-  html: "**/*.html",
+  html: "index.html",
   mainSass: "scss/main.scss",
   mainJS: "js/app.js",
-  js: "js/**/*.js",
+  js: "js/componentes/*.js",
   sass: "scss/**/*.scss",
+  vendor: "js/vendor/**.min.js",
+  minJs: "js/*.min.js",
+  minCss: "scss/*.min.css",
   fonts: "fonts/**",
 };
 
 var sources = {
   assets: config.source + paths.assets,
   html: config.source + paths.assets + paths.html,
-  sass: paths.assets + paths.sass,
-  js: config.source + paths.js,
+  js: config.source + paths.assets +paths.js,
+  sass: config.source + paths.assets +paths.sass,
   fonts: config.source + paths.assets + paths.fonts,
-  rootSass: config.source + paths.assets + paths.mainSass,
-  rootJS: config.source + paths.assets + paths.js
+  vendor: config.source + paths.assets + paths.vendor,
+  rootJS: config.source + paths.assets + paths.mainJS,
+  rootSass: config.source + paths.assets + paths.mainSass
 };
 
 gulp.task('html', ()=> {
   gulp.src(sources.html)
-  .pipe(gulp.dest(config.dist ));
+  .pipe(gulp.dest(config.dist));
 });
 
 //creando tarea sass
 gulp.task("sass", function () {
   gulp.src(sources.rootSass)
       .pipe(sass({
-          outputStyle: "compressed"
+          outputStyle: "uncompressed"
       }).on ("error", sass.logError))
       .pipe(gulp.dest(config.dist + paths.assets + "css"));
+});
+gulp.task('vendor', ()=> {
+  gulp.src(sources.vendor)
+  .pipe(gulp.dest(config.dist + paths.assets  +"js/vendor" ));
 });
 
 //creando tarea js
 gulp.task("js", function () {
-  gulp.src(sources.rootJS)
+  gulp.src([sources.rootJS, sources.js])
+      .pipe(concat('app.js'))
+      .pipe(rename("bundle.js"))
       .pipe(browserify({
         transform: ['babelify'],
       }))
-      .pipe(concat('app.js'))
-      //   .pipe(browserify())
-      .pipe(rename("bundle.js"))
       .pipe(gulp.dest(config.dist + paths.assets + "js"));
 });
 
@@ -78,8 +85,6 @@ gulp.task("html-watch", ["html"], function (done) {
   done();
 });
 
-
-
 gulp.task("serve", function () {
   browserSync.init(null, {
       // proxy: "http://localhost:5000",
@@ -93,5 +98,5 @@ gulp.task("serve", function () {
 
   gulp.watch(sources.html, ["html-watch"]);
   gulp.watch(sources.sass, ["sass-watch"]);
-  //gulp.watch(sources.js, ["js-watch"]);
+  gulp.watch(sources.js, ["js-watch"]);
 });

@@ -1,3 +1,4 @@
 # Dependency directories
 node_modules/
+# Main Files
 public/

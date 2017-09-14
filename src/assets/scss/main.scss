@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "styleui/grid.scss";
 @import "styleui/examplex.scss";
 
@@ -11,7 +12,25 @@ $gris: #C4C4C4;
 $gris-oscuro: #828282;
 
 
-h1 {
-  font-size: 34px;
-  text-align: center;
+/*Fonts Omnes*/
+.omnes-black {
+  font-family: "Omnes Black";
+}
+.omnes-bold {
+  font-family: "Omnes Bold";
+}
+.omnes-extralight {
+  font-family: "Omnes Extralight";
+}
+.omnes-light {
+  font-family: "Omnes Light";
+}
+.omnes-medium {
+  font-family: "Omnes Medium";
+}
+.omnes-regular {
+  font-family: "Omnes Regular";
+}
+.omnes-semibold {
+  font-family: "Omnes Semibold";
 }

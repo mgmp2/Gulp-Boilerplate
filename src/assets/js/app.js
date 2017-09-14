@@ -1,4 +1,4 @@
 
-let name = 'World...';
-let greeting = `Hello ${name}!`;
-console.log("principal ");
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+});
